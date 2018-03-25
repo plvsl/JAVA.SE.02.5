@@ -12,20 +12,20 @@ public class DisciplineTest {
 
     @Test
     public void doubleDisciplineShouldSetCorrectName(){
-        Discipline math = new Discipline("Mathematics");
+        Discipline math = new Discipline<Double>("Mathematics");
         assertEquals("Mathematics", math.getName());
     }
 
     @Test
     public void integerDisciplineShouldSetCorrectName(){
-        Discipline bio = new Discipline("Biology");
+        Discipline bio = new Discipline<Integer>("Biology");
         assertEquals("Biology", bio.getName());
     }
 
     @Test
     public void getStudentGroupsShouldReturnCorrectListForEachStudent(){
-        Discipline math = new Discipline("Mathematics");
-        Discipline bio = new Discipline("Biology");
+        Discipline math = new Discipline<Double>("Mathematics");
+        Discipline bio = new Discipline<Integer>("Biology");
 
         Student student1 = new Student(12);
         Student student2 = new Student(3);
@@ -34,21 +34,21 @@ public class DisciplineTest {
         math.addStudent(student2).addStudent(student1);
         bio.addStudent(student2).addStudent(student3);
 
-        List disciplines = Discipline.getStudentGroups(3);
-        assertEquals("Mathematics", ((Discipline)disciplines.get(0)).getName());
-        assertEquals("Biology", ((Discipline)disciplines.get(1)).getName());
+        List<Discipline> disciplines = Discipline.getStudentGroups(3);
+        assertEquals("Mathematics", disciplines.get(0).getName());
+        assertEquals("Biology", disciplines.get(1).getName());
 
-        List disciplines1 = Discipline.getStudentGroups(12);
-        assertEquals("Mathematics", ((Discipline)disciplines1.get(0)).getName());
+        List<Discipline> disciplines1 = Discipline.getStudentGroups(12);
+        assertEquals("Mathematics", disciplines1.get(0).getName());
 
-        List disciplines2 = Discipline.getStudentGroups(132);
-        assertEquals("Biology", ((Discipline)disciplines2.get(0)).getName());
+        List<Discipline> disciplines2 = Discipline.getStudentGroups(132);
+        assertEquals("Biology", disciplines2.get(0).getName());
     }
 
     @Test
     public void setMarkAndGetPositionInGroupShouldSetAndReturnCorrectValues(){
-        Discipline math = new Discipline("Mathematics");
-        Discipline bio = new Discipline("Biology");
+        Discipline math = new Discipline<Double>("Mathematics");
+        Discipline bio = new Discipline<Integer>("Biology");
 
         Student student1 = new Student(12);
         Student student2 = new Student(666);

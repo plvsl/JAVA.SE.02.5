@@ -15,7 +15,7 @@ public class StudentTest {
 
     @Before
     public void setUp() {
-        math = new Discipline("Mathematics");
+        math = new Discipline<Double>("Mathematics");
         student1 = new Student(12);
         student2 = new Student(1);
         math.addStudent(student2).addStudent(student1);

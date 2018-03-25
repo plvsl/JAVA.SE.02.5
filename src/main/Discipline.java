@@ -31,7 +31,7 @@ public class Discipline<T extends Comparable<? super T>> {
         return false;
     }
 
-    public static List getStudentGroups(int id) {
+    public static List<Discipline> getStudentGroups(int id) {
         List<Discipline> result = new LinkedList<>();
 
         for (Discipline discipline : disciplines) {
