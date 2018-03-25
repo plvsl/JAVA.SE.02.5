@@ -12,20 +12,20 @@ public class DisciplineTest {
 
     @Test
     public void doubleDisciplineShouldSetCorrectName(){
-        Discipline math = new Discipline<Double>("Mathematics");
+        Discipline math = new Discipline<>("Mathematics");
         assertEquals("Mathematics", math.getName());
     }
 
     @Test
     public void integerDisciplineShouldSetCorrectName(){
-        Discipline bio = new Discipline<Integer>("Biology");
+        Discipline bio = new Discipline<>("Biology");
         assertEquals("Biology", bio.getName());
     }
 
     @Test
     public void getStudentGroupsShouldReturnCorrectListForEachStudent(){
-        Discipline math = new Discipline<Double>("Mathematics");
-        Discipline bio = new Discipline<Integer>("Biology");
+        Discipline math = new Discipline<>("Mathematics");
+        Discipline bio = new Discipline<>("Biology");
 
         Student student1 = new Student(12);
         Student student2 = new Student(3);
@@ -47,8 +47,8 @@ public class DisciplineTest {
 
     @Test
     public void setMarkAndGetPositionInGroupShouldSetAndReturnCorrectValues(){
-        Discipline math = new Discipline<Double>("Mathematics");
-        Discipline bio = new Discipline<Integer>("Biology");
+        Discipline math = new Discipline<>("Mathematics");
+        Discipline bio = new Discipline<>("Biology");
 
         Student student1 = new Student(12);
         Student student2 = new Student(666);

@@ -5,8 +5,8 @@ import java.util.List;
 public class App {
 
     public static void main(String[] args) {
-        Discipline math = new Discipline<Double>("Mathematics");
-        Discipline bio = new Discipline<Integer>("Biology");
+        Discipline math = new Discipline<>("Mathematics");
+        Discipline bio = new Discipline<>("Biology");
 
         math.addStudent(new Student(1)).addStudent(new Student(12)).addStudent(new Student(123))
                 .addStudent(new Student(555)).addStudent(new Student(666)).addStudent(new Student(23));
