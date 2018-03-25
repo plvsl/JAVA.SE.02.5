@@ -2,12 +2,13 @@ package main;
 
 import java.util.*;
 
-public class Discipline {
+public class Discipline<T extends Comparable<? super T>> {
     private String name;
+    private Map<Student, T> marks = new HashMap<>();
     private List<Student> students = new LinkedList<>();
     private static List<Discipline> disciplines = new LinkedList<>();
 
-    Discipline(String name) {
+    public Discipline(String name) {
         this.name = name;
         disciplines.add(this);
     }
@@ -22,9 +23,11 @@ public class Discipline {
     }
 
     public boolean isStudentInGroup(Student studentCheck) {
-        for (Student student : students)
-            if (student.getId() == studentCheck.getId())
+        for (Student student : students) {
+            if (student.getId() == studentCheck.getId()) {
                 return true;
+            }
+        }
         return false;
     }
 
@@ -32,8 +35,8 @@ public class Discipline {
         List<Discipline> result = new LinkedList<>();
 
         for (Discipline discipline : disciplines) {
-            for (Student student : discipline.students) {
-                if (student.getId() == id) {
+            for (Object student : discipline.students) {
+                if (((Student)student).getId() == id) {
                     result.add(discipline);
                 }
             }
@@ -41,12 +44,32 @@ public class Discipline {
         return result;
     }
 
-    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
-        List<Map.Entry<K, V>> list = new ArrayList<>(map.entrySet());
+    public Discipline setMark(Student student, T mark) {
+        if (this.isStudentInGroup(student)) {
+            marks.put(student, mark);
+        }
+        return this;
+    }
+
+    public String getStudentPositionInGroup(Student student) {
+        Map<Student, T> sortedMarks = Discipline.sortByValue(marks);
+
+        int i = 1;
+        for (Student student1 : sortedMarks.keySet()) {
+            if (student.getId() == student1.getId()) {
+                return "Student position is " + (sortedMarks.keySet().size() - i + 1);
+            }
+            i++;
+        }
+        return "No such student";
+}
+
+    private static <Student, T extends Comparable<? super T>> Map<Student, T> sortByValue(Map<Student, T> map) {
+        List<Map.Entry<Student, T>> list = new ArrayList<>(map.entrySet());
         list.sort(Comparator.comparing(Map.Entry::getValue));
 
-        Map<K, V> result = new LinkedHashMap<>();
-        for (Map.Entry<K, V> entry : list) {
+        Map<Student, T> result = new LinkedHashMap<>();
+        for (Map.Entry<Student, T> entry : list) {
             result.put(entry.getKey(), entry.getValue());
         }
 
